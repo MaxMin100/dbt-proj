@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: blackhole
+    columns: 
+      - name: TARGET_FLAG_TARGET
+        tests:
+            - dbt_expectations.expect_column_values_to_not_be_null:
+                row_condition: "TARGET_FLAG_TARGET is not null"

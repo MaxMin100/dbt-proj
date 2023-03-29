@@ -1,0 +1,1 @@
+SELECT * FROM `bigquery-public-data.blackhole_database.sdss_dr7` LIMIT 10
