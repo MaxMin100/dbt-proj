@@ -9,12 +9,38 @@ models:
                 row_condition: "TARGET_FLAG_TARGET is not null"
   - name: empx
     columns:
+
       - name: id
         tests:
           - unique
+
       - name: dept
         tests:
           - dbt_expectations.expect_column_values_to_be_in_set:
               value_set: ['IT','GEO','FIN']
               config:
                   severity: warn
+                  store_failures: true
+                  schema: dbt_tests_results
+                  alias: empx_dept
+
+      - name: Hire_Date
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: date
+              config:
+                  severity: warn
+                  store_failures: true
+                  schema: dbt_tests_results
+                  alias: empx_hire_date
+        
+      - name: sal
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 100
+              max_value: 120
+              config:
+                severity: error
+                store_failures: true
+                schema: dbt_tests_results
+                alias: empx_sal_out_of_range
