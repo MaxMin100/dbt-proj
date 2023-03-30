@@ -35,6 +35,12 @@ models:
   my_new_project:
     # Applies to all files under models/example/
     example:
+<<<<<<< HEAD
       materialized: table
     my-model:
       materialized: table
+=======
+      materialized: view
+    dbt-dbc:
+      materialized: table
+>>>>>>> 3656346eb8cc44573d7e9f35277c49c232b97ba5
