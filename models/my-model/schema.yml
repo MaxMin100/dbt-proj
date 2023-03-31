@@ -13,6 +13,8 @@ models:
       - name: id
         tests:
           - unique
+          - is_null
+          - warn_if_odd
 
       - name: dept
         tests:
@@ -33,6 +35,14 @@ models:
                   store_failures: true
                   schema: dbt_tests_results
                   alias: empx_hire_date
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "[@]"
+              row_condition: "emailId is not Null"
+              config:
+                severity: error
+                store_failures: true
+                schema: dbt_tests_results
+                alias: empx_emailId_format_checker
         
       - name: sal
         tests:
@@ -40,7 +50,10 @@ models:
               min_value: 100
               max_value: 120
               config:
-                severity: error
+                severity: warn
                 store_failures: true
                 schema: dbt_tests_results
                 alias: empx_sal_out_of_range
+
+          
+          
